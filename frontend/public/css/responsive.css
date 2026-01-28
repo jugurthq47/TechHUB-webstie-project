@@ -10,6 +10,15 @@
         font-size: 1.1rem;
     }
     
+    .hero-image {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .hero-title-container {
+        gap: 1rem;
+    }
+    
     .product-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -75,6 +84,15 @@
     
     .hero p {
         font-size: 1rem;
+    }
+    
+    .hero-image {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .hero-title-container {
+        gap: 0.8rem;
     }
     
     .cta-button {
@@ -150,6 +168,15 @@
     
     .hero p {
         font-size: 0.9rem;
+    }
+    
+    .hero-image {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .hero-title-container {
+        gap: 0.6rem;
     }
     
     .cta-button {
