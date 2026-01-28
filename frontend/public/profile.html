@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - TechHub</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">
+                    <i class="fas fa-computer"></i>
+                    <span>TechHub</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#products">Products</a></li>
+                    <li><a href="index.html#categories">Categories</a></li>
+                    <li><a href="index.html#accessories">Accessories</a></li>
+                    <li><a href="index.html#deals">Deals</a></li>
+                </ul>
+            </div>
+            <div class="nav-icons">
+                <div class="auth-buttons">
+                    <button class="login-btn" onclick="window.location.href='login.html'">Login</button>
+                    <button class="signup-btn" onclick="window.location.href='signup.html'">Sign Up</button>
+                </div>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <div class="profile-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Content -->
+    <div class="profile-container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Back to Home
+        </a>
+        
+        <div class="profile-header">
+            <div class="profile-info">
+                <div class="profile-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="profile-details">
+                    <h1>Jugurtha Sidi Said</h1>
+                    <p><i class="fas fa-envelope"></i> jugurthasidisaid@gmail.com</p>
+                    <p><i class="fas fa-calendar"></i> Member since January 2023</p>
+                    <p><i class="fas fa-map-marker-alt"></i> San Francisco, CA</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <div class="profile-badges">
+                        <span class="badge badge-premium"><i class="fas fa-crown"></i> Premium</span>
+                        <span class="badge badge-verified"><i class="fas fa-check-circle"></i> Verified</span>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-stats">
+                <div class="stat-card">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label"><i class="fas fa-shopping-bag"></i> Orders</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label"><i class="fas fa-heart"></i> Wishlist</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label"><i class="fas fa-star"></i> Reviews</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$2.8k</div>
+                    <div class="stat-label"><i class="fas fa-dollar-sign"></i> Spent</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-sections">
+            <div class="profile-section">
+                <h2><i class="fas fa-shopping-bag"></i> Recent Orders</h2>
+                <div class="order-item">
+                    <div class="order-header">
+                        <div>
+                            <h4>Order #12345</h4>
+                            <div class="order-date">January 15, 2024</div>
+                        </div>
+                        <div class="order-status status-delivered">Delivered</div>
+                    </div>
+                    <p>Intel Core i9-13900K, ASUS ROG Strix Z790-E</p>
+                    <p><strong>Total: $1,039.98</strong></p>
+                </div>
+                <div class="order-item">
+                    <div class="order-header">
+                        <div>
+                            <h4>Order #12344</h4>
+                            <div class="order-date">January 10, 2024</div>
+                        </div>
+                        <div class="order-status status-processing">Processing</div>
+                    </div>
+                    <p>NVIDIA RTX 4090, Corsair RM1000x</p>
+                    <p><strong>Total: $1,769.98</strong></p>
+                </div>
+                <div class="order-item">
+                    <div class="order-header">
+                        <div>
+                            <h4>Order #12343</h4>
+                            <div class="order-date">January 5, 2024</div>
+                        </div>
+                        <div class="order-status status-delivered">Delivered</div>
+                    </div>
+                    <p>Samsung 980 Pro 2TB, Corsair Vengeance RGB 32GB</p>
+                    <p><strong>Total: $339.98</strong></p>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h2><i class="fas fa-heart"></i> Wishlist</h2>
+                <div class="wishlist-item">
+                    <img src="images/products/AMD Ryzen 9 7950X.png" alt="Product">
+                    <div class="wishlist-info">
+                        <h4>AMD Ryzen 9 7950X</h4>
+                        <p>16-core, 32-thread processor</p>
+                        <div class="wishlist-price">$549.99</div>
+                    </div>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+                <div class="wishlist-item">
+                    <img src="images/products/NVIDIA RTX 4090.png" alt="Product">
+                    <div class="wishlist-info">
+                        <h4>NVIDIA RTX 4090</h4>
+                        <p>GeForce RTX 4090, 24GB GDDR6X, DLSS 3</p>
+                        <div class="wishlist-price">$1,599.99</div>
+                    </div>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h2><i class="fas fa-cog"></i> Account Settings</h2>
+                <div class="settings-list">
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <i class="fas fa-user"></i>
+                            Personal Information
+                        </div>
+                        <a href="#" class="settings-action">Edit</a>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Shipping Addresses
+                        </div>
+                        <a href="#" class="settings-action">Manage</a>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <i class="fas fa-credit-card"></i>
+                            Payment Methods
+                        </div>
+                        <a href="#" class="settings-action">Update</a>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <i class="fas fa-bell"></i>
+                            Notifications
+                        </div>
+                        <a href="#" class="settings-action">Configure</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Shopping Cart</h2>
+                <span class="close-modal close">&times;</span>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be added dynamically -->
+            </div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script src="js/profile-ui-only.js"></script>
+    <script src="js/script-standalone.js"></script>
+</body>
+</html>
