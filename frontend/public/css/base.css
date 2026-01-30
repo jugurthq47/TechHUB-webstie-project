@@ -1,15 +1,23 @@
 /* Base styles and variables */
+/* Update these in base.css */
 :root {
     --primary-color: #2563eb;
     --secondary-color: #1e40af;
-    --accent-color: #f59e0b;
-    --text-dark: #1f2937;
-    --text-light: #6b7280;
-    --bg-light: #f9fafb;
+    --accent-color: #06b6d4; /* Changed to a modern Cyan */
+    --text-dark: #0f172a;    /* Deeper navy-black */
+    --text-light: #64748b;
+    --bg-light: #f8fafc;
     --bg-white: #ffffff;
-    --border-color: #e5e7eb;
-    --success-color: #10b981;
-    --danger-color: #ef4444;
+    --border-color: #e2e8f0;
+    
+    /* NEW: Elevation Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    
+    /* NEW: Blur effect for glassmorphism */
+    --glass: rgba(255, 255, 255, 0.7);
+    --blur: blur(12px);
 }
 
 * {
@@ -52,4 +60,8 @@ body {
 @keyframes fadeOut {
     from { opacity: 1; transform: translateX(0); }
     to { opacity: 0; transform: translateX(20px); }
+}
+
+.banner{
+    z-index: 10;
 }
