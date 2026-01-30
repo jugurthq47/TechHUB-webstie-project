@@ -1,0 +1,32 @@
+{
+  "name": "techhub-frontend",
+  "version": "1.0.0",
+  "description": "TechHub E-Shop Frontend - Modern computer components e-commerce website",
+  "main": "index.html",
+  "scripts": {
+    "serve": "cd public && python3 -m http.server 8080",
+    "serve-node": "cd public && npx http-server -p 8080 -c-1",
+    "dev": "cd public && npx live-server --port=8080 --host=0.0.0.0",
+    "build": "echo 'No build step required for static frontend'",
+    "test": "echo 'No tests configured yet'"
+  },
+  "keywords": [
+    "ecommerce",
+    "frontend",
+    "computer",
+    "components",
+    "tech",
+    "html5",
+    "css3",
+    "javascript"
+  ],
+  "author": "TechHub Team",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

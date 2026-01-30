@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - TechHub</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+                    <i class="fas fa-computer"></i>
+                    <span>TechHub</span>
+                </div>
+                <div class="dark-mode-toggle" id="darkModeToggle">
+                    <i class="fas fa-moon" id="darkModeIcon"></i>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#products">Products</a></li>
+                    <li><a href="index.html#categories">Categories</a></li>
+                    <li><a href="index.html#accessories">Accessories</a></li>
+                    <li><a href="index.html#deals">Deals</a></li>
+                </ul>
+            </div>
+            <div class="nav-icons">
+                <div class="auth-buttons">
+                    <button class="login-btn" onclick="window.location.href='login.html'">Login</button>
+                    <button class="signup-btn" onclick="window.location.href='signup.html'">Sign Up</button>
+                </div>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <div class="profile-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Content -->
+    <div class="profile-container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Back to Home
+        </a>
+        
+        <div class="profile-header">
+            <div class="profile-info">
+                <div class="profile-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="profile-details">
+                    <h1>Loading...</h1>
+                    <p><i class="fas fa-envelope"></i> Loading...</p>
+                    <p><i class="fas fa-calendar"></i> Loading...</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Loading...</p>
+                    <p><i class="fas fa-phone"></i> Loading...</p>
+                    <div class="profile-badges">
+                    </div>
+                </div>
+            </div>
+            <div class="profile-stats">
+                <div class="stat-card">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label"><i class="fas fa-shopping-bag"></i> Orders</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label"><i class="fas fa-heart"></i> Wishlist</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label"><i class="fas fa-star"></i> Reviews</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">379.4k د.ج</div>
+                    <div class="stat-label"><i class="fas fa-dollar-sign"></i> Spent</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-sections">
+            <div class="profile-section">
+                <h2><i class="fas fa-shopping-bag"></i> Recent Orders</h2>
+                <div id="ordersContainer">
+                    <p class="empty-state">No orders yet. Start shopping to see your order history here!</p>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h2><i class="fas fa-heart"></i> Wishlist</h2>
+                <div id="wishlistContainer">
+                    <p class="empty-state">Your wishlist is empty. Add products you love to see them here!</p>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h2><i class="fas fa-cog"></i> Account Settings</h2>
+                <div class="settings-list">
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <i class="fas fa-user"></i>
+                            Personal Information
+                        </div>
+                        <a href="#" class="settings-action" onclick="openPersonalInfoModal(event)">Edit</a>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Shipping Addresses
+                        </div>
+                        <a href="#" class="settings-action" onclick="openAddressesModal(event)">Manage</a>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <i class="fas fa-credit-card"></i>
+                            Payment Methods
+                        </div>
+                        <a href="#" class="settings-action" onclick="openPaymentModal(event)">Update</a>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <i class="fas fa-bell"></i>
+                            Notifications
+                        </div>
+                        <a href="#" class="settings-action" onclick="openNotificationsModal(event)">Configure</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Personal Information Modal -->
+    <div id="personalInfoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Personal Information</h2>
+                <span class="close-modal close" onclick="closeModal('personalInfoModal')">&times;</span>
+            </div>
+            <form id="personalInfoForm" class="settings-form">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('personalInfoModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Shipping Addresses Modal -->
+    <div id="addressesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Shipping Addresses</h2>
+                <span class="close-modal close" onclick="closeModal('addressesModal')">&times;</span>
+            </div>
+            <div class="addresses-list">
+                <div class="address-item">
+                    <div class="address-content">
+                        <h4>Home Address</h4>
+                        <p>123 Main Street, Apt 4B<br>Algiers, Algeria 16000</p>
+                        <p>+213 555 123 456</p>
+                    </div>
+                    <div class="address-actions">
+                        <button class="btn btn-sm btn-primary" onclick="editAddress('home')">Edit</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteAddress('home')">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('addressesModal')">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addNewAddress()">Add New Address</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Methods Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Payment Methods</h2>
+                <span class="close-modal close" onclick="closeModal('paymentModal')">&times;</span>
+            </div>
+            <div class="payment-methods-list">
+                <div class="payment-method">
+                    <div class="payment-content">
+                        <i class="fab fa-cc-visa"></i>
+                        <div class="payment-info">
+                            <h4>Visa ending in 4242</h4>
+                            <p>Expires 12/25</p>
+                        </div>
+                    </div>
+                    <div class="payment-actions">
+                        <button class="btn btn-sm btn-primary" onclick="editPaymentMethod('visa_4242')">Edit</button>
+                        <button class="btn btn-sm btn-danger" onclick="removePaymentMethod('visa_4242')">Remove</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('paymentModal')">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addPaymentMethod()">Add Payment Method</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Modal -->
+    <div id="notificationsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Notification Preferences</h2>
+                <span class="close-modal close" onclick="closeModal('notificationsModal')">&times;</span>
+            </div>
+            <form class="notifications-form">
+                <div class="notification-item">
+                    <label class="switch">
+                        <input type="checkbox" id="emailNotifications" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <div class="notification-info">
+                        <h4>Email Notifications</h4>
+                        <p>Receive order updates and promotions via email</p>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <label class="switch">
+                        <input type="checkbox" id="smsNotifications">
+                        <span class="slider"></span>
+                    </label>
+                    <div class="notification-info">
+                        <h4>SMS Notifications</h4>
+                        <p>Get text alerts for order status changes</p>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <label class="switch">
+                        <input type="checkbox" id="promoNotifications" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <div class="notification-info">
+                        <h4>Promotional Offers</h4>
+                        <p>Receive special deals and discount codes</p>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('notificationsModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Preferences</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Shopping Cart</h2>
+                <span class="close-modal close">&times;</span>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be added dynamically -->
+            </div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">0.00 د.ج</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script src="js/currency.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart-api.js"></script>
+    <script src="js/profile-ui-only.js"></script>
+    <script src="js/script-standalone.js"></script>
+</body>
+</html>
