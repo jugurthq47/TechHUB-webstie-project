@@ -38,10 +38,35 @@
     margin-right: 0.5rem;
 }
 
+.dark-mode-toggle {
+    position: relative;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    background: var(--bg-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.dark-mode-toggle:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: rotate(180deg);
+}
+
+.dark-mode-toggle i {
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 1.6rem;
+    gap: 1.7rem;
 }
 
 .nav-menu a {
@@ -67,6 +92,7 @@
     background: var(--bg-light);
     border-radius: 25px;
     padding: 0.5rem 1rem;
+    margin-left:30px;
     border: 1px solid var(--border-color);
 }
 

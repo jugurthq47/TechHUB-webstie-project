@@ -14,6 +14,9 @@ function findProductById(id) {
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize dark mode first
+    initializeDarkMode();
+    
     const productId = getProductIdFromUrl();
     
     // Setup logo click handler
@@ -34,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         profileIcon.style.cursor = 'pointer';
     }
     
+    // Load product if ID exists
     if (productId) {
         currentProduct = findProductById(productId);
         if (currentProduct) {
@@ -49,6 +53,51 @@ document.addEventListener('DOMContentLoaded', function() {
     
     updateCartCount();
 });
+
+// Initialize dark mode
+function initializeDarkMode() {
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const darkModeIcon = document.getElementById('darkModeIcon');
+    
+    // Check for saved theme preference or default to light mode
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        if (darkModeIcon) {
+            darkModeIcon.classList.remove('fa-moon');
+            darkModeIcon.classList.add('fa-sun');
+        }
+    }
+    
+    // Add dark mode toggle event listener
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+    }
+}
+
+// Toggle dark mode
+function toggleDarkMode() {
+    const darkModeIcon = document.getElementById('darkModeIcon');
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    // Set the new theme
+    document.documentElement.setAttribute('data-theme', newTheme);
+    
+    // Update the icon
+    if (darkModeIcon) {
+        if (newTheme === 'dark') {
+            darkModeIcon.classList.remove('fa-moon');
+            darkModeIcon.classList.add('fa-sun');
+        } else {
+            darkModeIcon.classList.remove('fa-sun');
+            darkModeIcon.classList.add('fa-moon');
+        }
+    }
+    
+    // Save the theme preference
+    localStorage.setItem('theme', newTheme);
+}
 
 // Load product details
 function loadProductDetails() {
@@ -345,33 +394,58 @@ function generateStars(rating) {
 
 // Setup event listeners
 function setupEventListeners() {
-    // Quantity controls
-    document.getElementById('decreaseQty').addEventListener('click', decreaseQuantity);
-    document.getElementById('increaseQty').addEventListener('click', increaseQuantity);
-    document.getElementById('quantity').addEventListener('change', validateQuantity);
+    // Quantity controls with error handling
+    const decreaseBtn = document.getElementById('decreaseQty');
+    const increaseBtn = document.getElementById('increaseQty');
+    const quantityInput = document.getElementById('quantity');
     
-    // Action buttons
-    document.getElementById('addToCartBtn').addEventListener('click', addToCart);
-    document.getElementById('buyNowBtn').addEventListener('click', buyNow);
-    document.getElementById('wishlistBtn').addEventListener('click', toggleWishlist);
+    if (decreaseBtn) {
+        decreaseBtn.addEventListener('click', decreaseQuantity);
+    }
+    if (increaseBtn) {
+        increaseBtn.addEventListener('click', increaseQuantity);
+    }
+    if (quantityInput) {
+        quantityInput.addEventListener('change', validateQuantity);
+    }
     
-    // Tab functionality
+    // Action buttons with error handling
+    const addToCartBtn = document.getElementById('addToCartBtn');
+    const buyNowBtn = document.getElementById('buyNowBtn');
+    const wishlistBtn = document.getElementById('wishlistBtn');
+    
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener('click', addToCart);
+    }
+    if (buyNowBtn) {
+        buyNowBtn.addEventListener('click', buyNow);
+    }
+    if (wishlistBtn) {
+        wishlistBtn.addEventListener('click', toggleWishlist);
+    }
+    
+    // Tab functionality with error handling
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabPanes = document.querySelectorAll('.tab-pane');
     
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const targetTab = button.dataset.tab;
-            
-            // Remove active class from all tabs and panes
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabPanes.forEach(pane => pane.classList.remove('active'));
-            
-            // Add active class to clicked tab and corresponding pane
-            button.classList.add('active');
-            document.getElementById(targetTab).classList.add('active');
+    if (tabButtons.length > 0 && tabPanes.length > 0) {
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetTab = button.dataset.tab;
+                
+                // Remove active class from all tabs and panes
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabPanes.forEach(pane => pane.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding pane
+                button.classList.add('active');
+                const targetPane = document.getElementById(targetTab);
+                if (targetPane) {
+                    targetPane.classList.add('active');
+                }
+            });
         });
-    });
+    }
 }
 
 // Quantity controls

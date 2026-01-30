@@ -4,6 +4,61 @@
     padding: 2rem 0;
     background: var(--bg-light);
     min-height: calc(100vh - 80px);
+    transition: background-color 0.3s ease;
+}
+
+/* Dark mode specific styles */
+[data-theme="dark"] .product-details {
+    background: var(--bg-light);
+}
+
+[data-theme="dark"] .product-info {
+    background: var(--bg-white);
+}
+
+[data-theme="dark"] .product-tabs {
+    background: var(--bg-white);
+}
+
+[data-theme="dark"] .tab-header {
+    background: var(--bg-white);
+    border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .tab-btn {
+    color: var(--text-dark);
+    background: var(--bg-white);
+}
+
+[data-theme="dark"] .tab-btn.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+[data-theme="dark"] .tab-pane {
+    background: var(--bg-white);
+    color: var(--text-dark);
+}
+
+[data-theme="dark"] .quantity-selector {
+    color: var(--text-dark);
+}
+
+[data-theme="dark"] .quantity-controls input {
+    background: var(--bg-white);
+    color: var(--text-dark);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .quantity-controls button {
+    background: var(--bg-white);
+    color: var(--text-dark);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .quantity-controls button:hover {
+    background: var(--primary-color);
+    color: white;
 }
 
 /* Breadcrumb */

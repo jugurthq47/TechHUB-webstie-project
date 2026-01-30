@@ -1,5 +1,8 @@
 // Authentication UI-only JavaScript (no functionality)
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize dark mode
+    initializeDarkMode();
+    
     // Setup logo click handler
     const logo = document.querySelector('.logo');
     if (logo) {
@@ -58,6 +61,51 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Initialize dark mode
+function initializeDarkMode() {
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const darkModeIcon = document.getElementById('darkModeIcon');
+    
+    // Check for saved theme preference or default to light mode
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        if (darkModeIcon) {
+            darkModeIcon.classList.remove('fa-moon');
+            darkModeIcon.classList.add('fa-sun');
+        }
+    }
+    
+    // Add dark mode toggle event listener
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+    }
+}
+
+// Toggle dark mode
+function toggleDarkMode() {
+    const darkModeIcon = document.getElementById('darkModeIcon');
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    // Set the new theme
+    document.documentElement.setAttribute('data-theme', newTheme);
+    
+    // Update the icon
+    if (darkModeIcon) {
+        if (newTheme === 'dark') {
+            darkModeIcon.classList.remove('fa-moon');
+            darkModeIcon.classList.add('fa-sun');
+        } else {
+            darkModeIcon.classList.remove('fa-sun');
+            darkModeIcon.classList.add('fa-moon');
+        }
+    }
+    
+    // Save the theme preference
+    localStorage.setItem('theme', newTheme);
+}
 
 // Show notification
 function showNotification(message) {

@@ -1,6 +1,6 @@
 /* Footer Styles */
 footer {
-    background: var(--text-dark);
+    background: #1f2937;
     color: white;
     padding: 3rem 0 1rem;
     margin-top: 4rem;
@@ -66,5 +66,15 @@ footer {
     text-align: center;
     padding: 1rem 0;
     border-top: 1px solid rgba(255,255,255,0.1);
-    color: var(--text-light);
+    color: #9ca3af;
+}
+
+/* Dark mode - make footer even darker */
+[data-theme="dark"] footer {
+    background: #111827;
+}
+
+[data-theme="dark"] .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    color: #6b7280;
 }

@@ -12,6 +12,20 @@
     --danger-color: #ef4444;
 }
 
+/* Dark mode variables */
+[data-theme="dark"] {
+    --primary-color: #1e40af;
+    --secondary-color: #1e3a8a;
+    --accent-color: #fbbf24;
+    --text-dark: #f9fafb;
+    --text-light: #d1d5db;
+    --bg-light: #1f2937;
+    --bg-white: #111827;
+    --border-color: #374151;
+    --success-color: #34d399;
+    --danger-color: #f87171;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -24,6 +38,7 @@ body {
     color: var(--text-dark);
     background-color: var(--bg-light);
     padding-top: 80px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Animations */

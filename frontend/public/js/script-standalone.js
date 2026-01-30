@@ -2,6 +2,10 @@
 let cart = [];
 let selectedAccessoryType = null;
 
+// Dark mode functionality
+const darkModeToggle = document.getElementById('darkModeToggle');
+const darkModeIcon = document.getElementById('darkModeIcon');
+
 // DOM elements
 const productGrid = document.getElementById('productGrid');
 const categoryFilter = document.getElementById('categoryFilter');
@@ -19,10 +23,48 @@ const closeModal = document.querySelector('.close');
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
     setupEventListeners();
+    initializeDarkMode();
     if (productGrid && categoryFilter && brandFilter && sortFilter && searchInput) {
         loadProducts();
     }
 });
+
+// Initialize dark mode
+function initializeDarkMode() {
+    // Check for saved theme preference or default to light mode
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        darkModeIcon.classList.remove('fa-moon');
+        darkModeIcon.classList.add('fa-sun');
+    }
+    
+    // Add dark mode toggle event listener
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+    }
+}
+
+// Toggle dark mode
+function toggleDarkMode() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    // Set the new theme
+    document.documentElement.setAttribute('data-theme', newTheme);
+    
+    // Update the icon
+    if (newTheme === 'dark') {
+        darkModeIcon.classList.remove('fa-moon');
+        darkModeIcon.classList.add('fa-sun');
+    } else {
+        darkModeIcon.classList.remove('fa-sun');
+        darkModeIcon.classList.add('fa-moon');
+    }
+    
+    // Save the theme preference
+    localStorage.setItem('theme', newTheme);
+}
 
 // Load products from local data
 function loadProducts() {
@@ -146,20 +188,19 @@ function setupEventListeners() {
     }
     
     // Brand cards
-    if (hasShopFilters) {
-        document.querySelectorAll('.brand-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const img = this.querySelector('img');
-                const brandName = img ? img.alt.toLowerCase() : '';
+    document.querySelectorAll('.brand-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const brandName = this.getAttribute('data-brand') || '';
+            if (brandFilter) {
                 brandFilter.value = brandName;
                 filterProducts();
                 const productsSection = document.getElementById('products');
                 if (productsSection) {
                     productsSection.scrollIntoView({ behavior: 'smooth' });
                 }
-            });
+            }
         });
-    }
+    });
     
     // CTA button
     const ctaButton = document.querySelector('.cta-button');
