@@ -28,7 +28,6 @@
     padding: 4rem 0;
     text-align: center;
     margin-bottom: 3rem;
-    overflow: hidden;
 }
 
 .hero-content {
@@ -37,45 +36,14 @@
     padding: 0 2rem;
 }
 
-.hero-title-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.hero-image {
-    width: 700px;
-    height: 250px;
-    border-radius: 20px;
-    display : flex;
-    flex-direction: row;
-    object-fit:scale-down;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    animation: imageFloat 3s ease-in-out infinite;
-    border: 4px solid rgba(255,255,255,0.2);
-}
-
-.hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
-
-
 .hero h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
-    animation: titleGlow 2s ease-in-out infinite alternate, titleSlide 1s ease-out;
-    text-shadow: 0 0 20px rgba(255,255,255,0.5);
 }
 
 .hero p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
-    animation: fadeInUp 1s ease-out 0.3s both;
 }
 
 .cta-button {
@@ -85,83 +53,12 @@
     border: none;
     border-radius: 25px;
     font-size: 1.1rem;
-    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    animation: buttonPulse 2s ease-in-out infinite, buttonSlide 1s ease-out 0.6s both;
-    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+    transition: transform 0.3s;
 }
 
 .cta-button:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 6px 25px rgba(249, 115, 22, 0.4);
-    background: linear-gradient(135deg, var(--accent-color), #dc2626);
-}
-
-/* Hero Animations */
-@keyframes titleGlow {
-    0% {
-        text-shadow: 0 0 20px rgba(255,255,255,0.5);
-        transform: translateY(0);
-    }
-    100% {
-        text-shadow: 0 0 30px rgba(255,255,255,0.8), 0 0 40px rgba(255,255,255,0.6);
-        transform: translateY(-2px);
-    }
-}
-
-@keyframes titleSlide {
-    0% {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes buttonPulse {
-    0% {
-        box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
-    }
-    50% {
-        box-shadow: 0 4px 25px rgba(249, 115, 22, 0.5);
-    }
-    100% {
-        box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
-    }
-}
-
-@keyframes buttonSlide {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes imageFloat {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
+    transform: translateY(-2px);
 }
 
 /* Product Cards */
@@ -527,4 +424,22 @@
 
 .brand-card:hover .brand-name {
     color: white;
+}
+
+/*glow on cat cards*/
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+
+.category-card:hover::before {
+    transform: scaleX(1);
 }
