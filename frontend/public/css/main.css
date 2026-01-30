@@ -7,3 +7,20 @@
 @import url('responsive.css');
 @import url('product-details.css');
 @import url('profile.css');
+
+.hero {
+    /* Remove any background-color if present */
+    /* background-color: #007BFF; */ /* example blue color */
+
+    /* Add background image */
+    background-image: url('../images/banner.jpg'); /* path to your image */
+    background-size: cover;       /* make it cover the entire hero section */
+    background-position: center;  /* center the image */
+    background-repeat: no-repeat; /* prevent repeating */
+    height: 100vh;                /* optional: full viewport height */
+    display: flex;                /* center the content vertically & horizontally */
+    align-items: center;
+    justify-content: center;
+    color: #fff;                  /* make text visible on image */
+    text-align: center;
+}
