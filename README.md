@@ -1,4 +1,4 @@
-# TechHub E-Commerce Frontend
+# TechHub E-Commerce Full-stack Website
 
 A modern, responsive e-commerce frontend built with HTML, CSS, and JavaScript. Features a complete shopping experience with product browsing, cart management, user authentication, and profile management.
 
