@@ -217,10 +217,3 @@ const products = [
         rating: 4.4
     }
 ];
-
-// Export for use in other modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = products;
-} else {
-    window.products = products;
-}
