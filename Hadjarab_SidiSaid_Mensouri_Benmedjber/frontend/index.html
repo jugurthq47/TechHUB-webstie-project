@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,16 +7,19 @@
     <title>TechHub - Computer Components E-Shop</title>
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- titre, encdg des crctr,lien  vers fichie css ,icone font awesome -->
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navigation permet de se deplasser dans site-->
     <nav class="navbar home-page">
         <div class="nav-container">
             <div class="nav-left">
+                <!-- logo techhub -->
                 <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
                     <img src="images/logo.png" alt="TechHub Logo" style="height: 40px; margin-right: 10px;">
                     <span>TechHub</span>
                 </div>
+                <!-- un menu (Home, Products, Categories, Deals…) -->
                 <ul class="nav-menu">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="#products">Products</a></li>
@@ -24,18 +28,22 @@
                     <li><a href="#deals">Deals</a></li>
                 </ul>
             </div>
+            <!-- 2 barre de recherche -->
             <div class="nav-icons">
                 <div class="search-bar">
                     <input type="text" placeholder="Search components..." id="searchInput">
                     <i class="fas fa-search" id="searchButton"></i>
                 </div>
+                <!-- mode sombre -->
                 <div class="dark-mode-toggle" id="darkModeToggle">
                     <i class="fas fa-moon" id="darkModeIcon"></i>
                 </div>
+                <!-- bouttons login and sign up -->
                 <div class="auth-buttons">
                     <button class="login-btn" id="loginBtn">Login</button>
                     <button class="signup-btn" id="signupBtn">Sign Up</button>
                 </div>
+                <!-- iconde du panier -->
                 <div class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
@@ -45,18 +53,22 @@
     </nav>
 
     <main>
+        <!-- section hero 1 ere chose visible sur sit -->
         <section id="hero" class="hero">
             <div class="hero-content">
                 <div class="hero-title-container">
                     <div class="hero-image">
                         <img src="images/logo.png" alt="Gaming PC Setup" />
                     </div>
+                    <!-- presente le slogon build ur drram pc -->
                     <h1>Build Your Dream PC</h1>
                 </div>
                 <p>Premium computer components for enthusiasts and professionals</p>
+                <!-- shop now -->
                 <button class="cta-button">Shop Now</button>
             </div>
         </section>
+       <!-- Cette partie affiche les offres spéciales et promotions, comme des réductions ou la livraison gratuite -->
 
        <section id="deals" class="deals">
           <h2>Hot Deals</h2>
@@ -73,6 +85,8 @@
             </div>
           </div>
         </section>
+        <!-- Cette section affiche les produits principaux du site. -->
+         <!-- L’utilisateur peut filtrer par catégorie, par marque ou trier par prix -->
 
         <section id="products" class="products">
             <div class="products-header">
@@ -130,6 +144,7 @@
 
             </div>
         </section>
+        <!-- Ces sections permettent de naviguer par type de matériel (processeurs, cartes graphiques, RAM -->
 
         <section id="categories" class="categories">
             <h2>Shop by Category</h2>
@@ -176,6 +191,7 @@
                 </div>
             </div>
         </section>
+        <!-- Cette partie met en avant les grandes marques informatiques comme Intel, AMD, NVIDIA et ASUS. -->
 
         <section id="accessories" class="accessories">
             <h2>PC Accessories & Peripherals</h2>
@@ -197,7 +213,7 @@
                 </div>
             </div>
         </section>
-
+        
         <section id="featured-brands" class="featured-brands">
             <h2>Featured Brands</h2>
             <div class="brands-container">
@@ -228,7 +244,7 @@
             </div>
         </section>
     </main>
-
+    <!-- Le pied de page contient les informations du site, les liens rapides, le service client et les coordonnées. -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -291,3 +307,4 @@
     <script src="script/script.js"></script>
 </body>
 </html>
+
