@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Page encoding and responsive settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title -->
     <title>Login - TechHub</title>
+
+    <!-- Authentication page stylesheet -->
     <link rel="stylesheet" href="../style/auth.css">
+
+    <!-- Font Awesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Navigation -->
+
+    <!-- ================= Navigation Bar ================= -->
     <nav class="navbar">
         <div class="nav-container">
+
+            <!-- Left side: Logo and navigation menu -->
             <div class="nav-left">
+                <!-- Website logo (click to return to home page) -->
                 <div class="logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
                     <img src="../images/logo.png" alt="TechHub Logo" style="height: 40px; margin-right: 10px;">
                     <span>TechHub</span>
                 </div>
+
+                <!-- Navigation links -->
                 <ul class="nav-menu">
                     <li><a href="../index.html">Home</a></li>
                     <li><a href="../index.html#products">Products</a></li>
@@ -24,38 +37,49 @@
                     <li><a href="../index.html#deals">Deals</a></li>
                 </ul>
             </div>
+
+            <!-- Right side: Dark mode toggle and authentication buttons -->
             <div class="nav-icons">
+                <!-- Dark mode button -->
                 <div class="dark-mode-toggle" id="darkModeToggle">
                     <i class="fas fa-moon" id="darkModeIcon"></i>
                 </div>
+
+                <!-- Login and Signup buttons -->
                 <div class="auth-buttons">
                     <button class="login-btn">Login</button>
                     <button class="signup-btn" onclick="window.location.href='signup.html'">Sign Up</button>
                 </div>
-    
             </div>
         </div>
     </nav>
 
+    <!-- ================= Login Section ================= -->
     <div class="auth-container">
         <div class="auth-main">
             <div class="auth-card">
+
+                <!-- Login header -->
                 <div class="auth-header">
                     <h1>Welcome Back</h1>
                     <p>Login to your TechHub account</p>
                 </div>
-                
+
+                <!-- Login form -->
                 <form id="loginForm">
+                    <!-- Email input -->
                     <div class="form-group">
                         <label for="email">Email Address</label>
                         <input type="email" id="email" name="email" required placeholder="Enter your email">
                     </div>
-                    
+
+                    <!-- Password input -->
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" required placeholder="Enter your password">
                     </div>
-                    
+
+                    <!-- Remember me and forgot password -->
                     <div class="form-options">
                         <div class="remember-me">
                             <input type="checkbox" id="remember" name="remember">
@@ -63,14 +87,17 @@
                         </div>
                         <a href="#" class="forgot-password">Forgot password?</a>
                     </div>
-                    
+
+                    <!-- Submit button -->
                     <button type="submit" class="auth-primary-btn">Login</button>
                 </form>
-                
+
+                <!-- Divider between classic and social login -->
                 <div class="divider">
                     <span>OR</span>
                 </div>
-                
+
+                <!-- Social login buttons -->
                 <div class="social-login">
                     <button class="social-btn">
                         <i class="fab fa-google"></i>
@@ -81,14 +108,18 @@
                         Facebook
                     </button>
                 </div>
-                
+
+                <!-- Footer link to signup page -->
                 <div class="auth-footer">
                     <p>Don't have an account? <a href="signup.html">Sign up</a></p>
                 </div>
+
             </div>
         </div>
     </div>
 
+    <!-- JavaScript file for interactivity -->
     <script src="../script/script.js"></script>
+
 </body>
 </html>
