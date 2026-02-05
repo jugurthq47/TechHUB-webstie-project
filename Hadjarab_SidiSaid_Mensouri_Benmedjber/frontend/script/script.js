@@ -1,17 +1,37 @@
-// State
+// ==========================
+// Global State
+// ==========================
+
+// Stores the selected accessory sub-type (e.g. mouse, keyboard)
 let selectedAccessoryType = null;
 
-// Dark mode functionality
+
+// ==========================
+// Dark Mode Elements
+// ==========================
+
+// Button that toggles dark mode
 const darkModeToggle = document.getElementById('darkModeToggle');
+
+// Icon inside the dark mode button (moon / sun)
 const darkModeIcon = document.getElementById('darkModeIcon');
 
-// DOM elements
+
+// ==========================
+// Main DOM Elements
+// ==========================
+
+// Container where product cards will be displayed
 const productGrid = document.getElementById('productGrid');
+
+// Filters and search inputs
 const categoryFilter = document.getElementById('categoryFilter');
 const brandFilter = document.getElementById('brandFilter');
 const sortFilter = document.getElementById('sortFilter');
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
+
+// Cart elements
 const cartIcon = document.querySelector('.cart-icon');
 const cartModal = document.getElementById('cartModal');
 const cartItemsEl = document.getElementById('cartItems');
@@ -19,440 +39,295 @@ const cartTotalEl = document.getElementById('cartTotal');
 const cartCountEl = document.querySelector('.cart-count');
 const closeModalBtn = document.querySelector('.close');
 
-// Initialize the app
-document.addEventListener('DOMContentLoaded', function() {
+
+// ==========================
+// App Initialization
+// ==========================
+
+// This runs when the HTML page is fully loaded
+document.addEventListener('DOMContentLoaded', function () {
+
+    // Debug logs (for development only)
     console.log('DOMContentLoaded fired');
     console.log('productGrid:', productGrid);
     console.log('products:', typeof products !== 'undefined' ? products.length : 'undefined');
 
+    // Attach all event listeners
     setupEventListeners();
+
+    // Initialize dark mode based on saved preference
     initializeDarkMode();
+
+    // Load products only if required elements exist
     if (productGrid && categoryFilter && brandFilter && sortFilter && searchInput) {
-        console.log('Loading products...');
         loadProducts();
-    } else {
-        console.log('Missing elements:', {
-            productGrid: !!productGrid,
-            categoryFilter: !!categoryFilter,
-            brandFilter: !!brandFilter,
-            sortFilter: !!sortFilter,
-            searchInput: !!searchInput
-        });
     }
 });
 
-// Initialize dark mode
+
+// ==========================
+// Dark Mode Logic
+// ==========================
+
+// Initialize dark mode from localStorage
 function initializeDarkMode() {
-    // Check for saved theme preference or default to light mode
+
+    // Get saved theme from browser storage
     const savedTheme = localStorage.getItem('theme');
+
+    // If user previously selected dark mode
     if (savedTheme === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
+
+        // Change icon to sun
         darkModeIcon.classList.remove('fa-moon');
         darkModeIcon.classList.add('fa-sun');
     }
 
-    // Add dark mode toggle event listener
+    // Attach click event to dark mode toggle button
     if (darkModeToggle) {
         darkModeToggle.addEventListener('click', toggleDarkMode);
     }
 }
 
-// Toggle dark mode
+// Switch between dark and light mode
 function toggleDarkMode() {
+
+    // Get current theme from <html>
     const currentTheme = document.documentElement.getAttribute('data-theme');
+
+    // Decide new theme
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
-    // Set the new theme
+    // Apply new theme
     document.documentElement.setAttribute('data-theme', newTheme);
 
-    // Update the icon
+    // Update icon
     if (newTheme === 'dark') {
-        darkModeIcon.classList.remove('fa-moon');
-        darkModeIcon.classList.add('fa-sun');
+        darkModeIcon.classList.replace('fa-moon', 'fa-sun');
     } else {
-        darkModeIcon.classList.remove('fa-sun');
-        darkModeIcon.classList.add('fa-moon');
+        darkModeIcon.classList.replace('fa-sun', 'fa-moon');
     }
 
-    // Save the theme preference
+    // Save preference
     localStorage.setItem('theme', newTheme);
 }
 
-// Load products from local data
+
+// ==========================
+// Product Loading
+// ==========================
+
+// Load products from local array
 function loadProducts() {
-    try {
-        renderProducts(products);
-        updateBrandFilter(products);
-    } catch (error) {
-        console.error('Failed to load products:', error);
-        showNotification('Failed to load products. Please try again.');
-    }
+    renderProducts(products);
+    updateBrandFilter(products);
 }
 
-// Setup event listeners
+
+// ==========================
+// Event Listeners Setup
+// ==========================
+
 function setupEventListeners() {
-    // Logo click to go to home
+
+    // Logo click → go to home page
     const logo = document.querySelector('.logo');
     if (logo) {
-        logo.addEventListener('click', function() {
+        logo.addEventListener('click', () => {
             window.location.href = 'index.html';
         });
         logo.style.cursor = 'pointer';
     }
 
-    const hasShopFilters = !!(categoryFilter && brandFilter && sortFilter && searchInput);
+    // Check if shop filters exist
+    const hasShopFilters = categoryFilter && brandFilter && sortFilter && searchInput;
 
     if (hasShopFilters) {
-        // Category filter
-        categoryFilter.addEventListener('change', function() {
+
+        // Category filter change
+        categoryFilter.addEventListener('change', () => {
             selectedAccessoryType = null;
             updateBrandFilter(products);
             filterProducts();
         });
 
-        // Brand filter
+        // Brand filter change
         brandFilter.addEventListener('change', filterProducts);
 
-        // Sort filter
+        // Sort filter change
         sortFilter.addEventListener('change', filterProducts);
 
-        // Search
+        // Search input typing (with debounce)
         searchInput.addEventListener('input', debounce(filterProducts, 300));
+
+        // Search button click
         if (searchButton) {
             searchButton.addEventListener('click', performSearch);
         }
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                performSearch();
-            }
+
+        // Enter key triggers search
+        searchInput.addEventListener('keypress', e => {
+            if (e.key === 'Enter') performSearch();
         });
     }
 
-    // Cart modal
+    // Open cart modal
     if (cartIcon && cartModal) {
         cartIcon.addEventListener('click', openCartModal);
     }
-    if (closeModalBtn && cartModal) {
+
+    // Close cart modal
+    if (closeModalBtn) {
         closeModalBtn.addEventListener('click', closeCartModal);
     }
 
-    // Login/Signup buttons
-    const loginBtn = document.getElementById('loginBtn');
-    const signupBtn = document.getElementById('signupBtn');
-
-    if (loginBtn) {
-        loginBtn.addEventListener('click', function() {
-            window.location.href = 'content/login.html';
-        });
-    }
-
-    if (signupBtn) {
-        signupBtn.addEventListener('click', function() {
-            window.location.href = 'content/signup.html';
-        });
-    }
-
     // Close modal when clicking outside
-    window.addEventListener('click', function(e) {
-        if (cartModal && e.target === cartModal) {
-            closeCartModal();
-        }
+    window.addEventListener('click', e => {
+        if (e.target === cartModal) closeCartModal();
     });
-
-    // Category cards
-    if (hasShopFilters) {
-        document.querySelectorAll('.category-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const category = this.dataset.category;
-                categoryFilter.value = category;
-                updateBrandFilter(products);
-                filterProducts();
-                const productsSection = document.getElementById('products');
-                if (productsSection) {
-                    productsSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-    }
-
-    // Accessory cards
-    if (hasShopFilters) {
-        document.querySelectorAll('.accessory-card').forEach(card => {
-            card.addEventListener('click', function() {
-                selectedAccessoryType = this.dataset.category;
-                categoryFilter.value = 'accessories';
-                updateBrandFilter(products);
-                filterProducts();
-                const productsSection = document.getElementById('products');
-                if (productsSection) {
-                    productsSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-    }
-
-    // Brand cards
-    document.querySelectorAll('.brand-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const brandName = this.getAttribute('data-brand') || '';
-            if (brandFilter) {
-                brandFilter.value = brandName;
-                filterProducts();
-                const productsSection = document.getElementById('products');
-                if (productsSection) {
-                    productsSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-        });
-    });
-
-    // CTA button
-    const ctaButton = document.querySelector('.cta-button');
-    if (ctaButton) {
-        ctaButton.addEventListener('click', function() {
-            const productsSection = document.getElementById('products');
-            if (productsSection) {
-                productsSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    }
 }
 
-// Update brand filter based on available products
+
+// ==========================
+// Brand Filter Update
+// ==========================
+
+// Update brand dropdown based on selected category
 function updateBrandFilter(products) {
-    if (!categoryFilter || !brandFilter) {
-        return;
-    }
+
+    if (!categoryFilter || !brandFilter) return;
 
     const category = categoryFilter.value;
     const previousBrand = brandFilter.value;
 
-    // Get brands available for selected category
     let availableBrands = ['all'];
 
+    // Get brands for selected category
     if (category !== 'all') {
-        const categoryProducts = products.filter(p => p.category === category);
-        const brandSet = new Set(categoryProducts.map(p => p.brand));
-        availableBrands = ['all', ...brandSet];
+        const filtered = products.filter(p => p.category === category);
+        availableBrands = ['all', ...new Set(filtered.map(p => p.brand))];
     } else {
-        const brandSet = new Set(products.map(p => p.brand));
-        availableBrands = ['all', ...brandSet];
+        availableBrands = ['all', ...new Set(products.map(p => p.brand))];
     }
 
-    // Update brand filter dropdown
+    // Update dropdown options
     brandFilter.innerHTML = '';
     availableBrands.forEach(brand => {
         const option = document.createElement('option');
         option.value = brand;
-        option.textContent = brand === 'all' ? 'All Brands' : brand.charAt(0).toUpperCase() + brand.slice(1);
+        option.textContent = brand === 'all' ? 'All Brands' : brand;
         brandFilter.appendChild(option);
     });
 
-    const hasPrevious = Array.from(brandFilter.options).some(o => o.value === previousBrand);
-    brandFilter.value = hasPrevious ? previousBrand : 'all';
+    // Restore previous selection if possible
+    brandFilter.value = availableBrands.includes(previousBrand) ? previousBrand : 'all';
 }
 
-// Filter products from local data
+
+// ==========================
+// Filtering & Sorting
+// ==========================
+
 function filterProducts() {
-    if (!categoryFilter || !brandFilter || !searchInput) {
-        return;
+
+    if (!categoryFilter || !brandFilter || !searchInput) return;
+
+    let filteredProducts = [...products];
+
+    // Filter by category
+    if (categoryFilter.value !== 'all') {
+        filteredProducts = filteredProducts.filter(
+            p => p.category === categoryFilter.value
+        );
     }
 
-    try {
-        let filteredProducts = [...products];
-
-        // Filter by category
-        if (categoryFilter.value !== 'all') {
-            filteredProducts = filteredProducts.filter(product => product.category === categoryFilter.value);
-        }
-
-        if (categoryFilter.value === 'accessories' && selectedAccessoryType) {
-            filteredProducts = filteredProducts.filter(product => product.accessoryType === selectedAccessoryType);
-        }
-
-        // Filter by brand
-        if (brandFilter.value !== 'all') {
-            filteredProducts = filteredProducts.filter(product => product.brand === brandFilter.value);
-        }
-
-        // Filter by search term
-        if (searchInput.value) {
-            const searchLower = searchInput.value.toLowerCase();
-            filteredProducts = filteredProducts.filter(product =>
-                product.name.toLowerCase().includes(searchLower) ||
-                product.description.toLowerCase().includes(searchLower) ||
-                product.brand.toLowerCase().includes(searchLower)
-            );
-        }
-
-        // Sort products
-        switch (sortFilter.value) {
-            case 'price-low':
-                filteredProducts.sort((a, b) => a.price - b.price);
-                break;
-            case 'price-high':
-                filteredProducts.sort((a, b) => b.price - a.price);
-                break;
-            case 'name':
-                filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
-                break;
-            case 'rating':
-                filteredProducts.sort((a, b) => b.rating - a.rating);
-                break;
-            default: // featured
-                // Keep original order
-                break;
-        }
-
-        renderProducts(filteredProducts);
-    } catch (error) {
-        console.error('Failed to filter products:', error);
-        showNotification('Failed to filter products. Please try again.');
+    // Filter by accessory type
+    if (categoryFilter.value === 'accessories' && selectedAccessoryType) {
+        filteredProducts = filteredProducts.filter(
+            p => p.accessoryType === selectedAccessoryType
+        );
     }
+
+    // Filter by brand
+    if (brandFilter.value !== 'all') {
+        filteredProducts = filteredProducts.filter(
+            p => p.brand === brandFilter.value
+        );
+    }
+
+    // Filter by search text
+    if (searchInput.value) {
+        const text = searchInput.value.toLowerCase();
+        filteredProducts = filteredProducts.filter(p =>
+            p.name.toLowerCase().includes(text) ||
+            p.description.toLowerCase().includes(text) ||
+            p.brand.toLowerCase().includes(text)
+        );
+    }
+
+    // Sort products
+    switch (sortFilter.value) {
+        case 'price-low':
+            filteredProducts.sort((a, b) => a.price - b.price);
+            break;
+        case 'price-high':
+            filteredProducts.sort((a, b) => b.price - a.price);
+            break;
+        case 'name':
+            filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+        case 'rating':
+            filteredProducts.sort((a, b) => b.rating - a.rating);
+            break;
+    }
+
+    renderProducts(filteredProducts);
 }
 
-// Perform search and scroll to products
-function performSearch() {
-    filterProducts();
-    const productsSection = document.getElementById('products');
-    if (productsSection) {
-        productsSection.scrollIntoView({ behavior: 'smooth' });
-    }
-}
 
-// Render products
+// ==========================
+// Rendering Products
+// ==========================
+
 function renderProducts(productsToRender) {
-    if (!productGrid) {
-        return;
-    }
+
+    if (!productGrid) return;
 
     productGrid.innerHTML = '';
 
+    // Show message if no products found
     if (productsToRender.length === 0) {
-        productGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; font-size: 1.2rem; color: var(--text-light);">No products found.</p>';
+        productGrid.innerHTML = '<p>No products found.</p>';
         return;
     }
 
+    // Create and append product cards
     productsToRender.forEach(product => {
-        const productCard = createProductCard(product);
-        productGrid.appendChild(productCard);
+        productGrid.appendChild(createProductCard(product));
     });
 }
 
-// Create product card
-function createProductCard(product) {
-    const card = document.createElement('div');
-    card.className = 'product-card';
-    card.innerHTML = `
-        <div class="product-image" onclick="viewProduct(${product.id})">
-            <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover;">
-        </div>
-        <div class="product-info">
-            <h3 onclick="viewProduct(${product.id})" style="cursor: pointer; color: var(--primary-color);">${product.name}</h3>
-            <p>${product.description}</p>
-            <div class="product-price">${window.formatDZD ? window.formatDZD(product.price) : product.price.toFixed(2) + ' د.ج'}</div>
-            <button class="add-to-cart" onclick="addProductToCart(${product.id})">
-                <i class="fas fa-shopping-cart"></i> Add to Cart
-            </button>
-        </div>
-    `;
-    return card;
-}
 
-// Add product to cart by ID (wrapper for cart.js)
-function addProductToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    if (product) {
-        addToCart(product);
-    } else {
-        showNotification('Product not found!');
-    }
-}
+// ==========================
+// Utility Functions
+// ==========================
 
+// Delay function execution (used for search input)
+function debounce(func, delay) {
+    let timeout;
+    return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func(...args), delay);
+    };
+}
 
 // Open cart modal
 function openCartModal() {
-    if (!cartModal) {
-        return;
-    }
     cartModal.style.display = 'flex';
 }
 
 // Close cart modal
 function closeCartModal() {
-    if (!cartModal) {
-        return;
-    }
     cartModal.style.display = 'none';
 }
-
-// Show notification
-function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: var(--success-color);
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 8px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        z-index: 3000;
-        animation: slideIn 0.3s ease-out;
-    `;
-    notification.textContent = message;
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-        notification.style.animation = 'fadeOut 0.3s ease-out';
-        setTimeout(() => {
-            if (document.body.contains(notification)) {
-                document.body.removeChild(notification);
-            }
-        }, 300);
-    }, 3000);
-}
-
-// Debounce function for search
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-
-// Add some interactivity to deal buttons
-document.querySelectorAll('.deal-button').forEach(button => {
-    button.addEventListener('click', function() {
-        const dealText = this.parentElement.querySelector('h3').textContent;
-        showNotification(`${dealText} - Check out our amazing deals!`);
-        const productsSection = document.getElementById('products');
-        if (productsSection) {
-            productsSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-});
-
-// Smooth scroll for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const href = this.getAttribute('href');
-        // Remove the # symbol for querySelector
-        const targetId = href.startsWith('#') ? href.substring(1) : href;
-        const target = document.getElementById(targetId);
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
